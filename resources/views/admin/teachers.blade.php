@@ -62,9 +62,9 @@
                             <!--end col-->
                             <div class="col-md-6">
                                 <div class="form-group position-relative">
-                                    <label>@lang('trans.password') <span class="text-danger">*</span></label>
+                                    <label>@lang('trans.password') </label>
                                     <input type="password" name="password" class="form-control"
-                                        placeholder="@lang('trans.password')" required="">
+                                        placeholder="@lang('trans.password')" >
                                 </div>
                             </div>
                             <div class="col-md-12">
