@@ -151,7 +151,7 @@
                     <div class="row justify-content-center">
                         <div class="col-12 text-center">
                             <div class="title-heading text-white mt-4">
-                                <h1 class="display-4 title-dark font-weight-bold mb-3">You Can Learn Anything With Us
+                                <h1 class="display-4 title-dark font-weight-bold mb-3">@lang('trans.guide1')
                                 </h1>
                                 <!-- <p class="para-desc para-dark mx-auto text-light">Launch your campaign and benefit from
                                     our expertise on designing and managing conversion centered bootstrap4 html page.
@@ -171,8 +171,7 @@
                     <div class="row justify-content-center">
                         <div class="col-12 text-center">
                             <div class="title-heading text-white mt-4">
-                                <h1 class="display-4 title-dark font-weight-bold mb-3">Better Education For A Better
-                                    Future </h1>
+                                <h1 class="display-4 title-dark font-weight-bold mb-3">@lang('trans.guide2')</h1>
                                 <!-- <p class="para-desc para-dark mx-auto text-light">Launch your campaign and benefit from
                                     our expertise on designing and managing conversion centered bootstrap4 html page.
                                 </p> -->
@@ -203,9 +202,8 @@
                                     alt="">
                             </div>
 
-                            <h4 class="mt-3"><a href="#courses" class="title text-dark mouse-down"> Our Courses</a></h4>
-                            <p class="text-muted">It is a long established fact that a reader will be of a page when
-                                reader will be of a page looking at its layout. </p>
+                            <h4 class="mt-3"><a href="#courses" class="title text-dark mouse-down">  @lang('trans.course_guide')</a></h4>
+                            <p class="text-muted">@lang('trans.course_guide_words') </p>
                             <img src="images/icon/graduation-hat.svg" class="full-img" height="300" alt="">
                         </div>
                     </div>
@@ -219,10 +217,8 @@
                                 <img src="{{asset('images/icon/ai.svg')}}" class="avatar avatar-small" alt="">
                             </div>
 
-                            <h4 class="mt-3"><a href="#instructors" class="title text-dark mouse-down"> Expert
-                                    Teachers</a></h4>
-                            <p class="text-muted">It is a long established fact that a reader will be of a page when
-                                reader will be of a page looking at its layout. </p>
+                            <h4 class="mt-3"><a href="#instructors" class="title text-dark mouse-down"> @lang('trans.teacher_guide')</a></h4>
+                            <p class="text-muted">@lang('trans.teacher_guide_words') </p>
                             <img src="images/icon/ai.svg" class="full-img" height="300" alt="">
                         </div>
                     </div>

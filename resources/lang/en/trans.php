@@ -158,6 +158,12 @@ return [
     'present' => 'Present', 
     'instructors' => 'Instructors', 
     'categories' => 'Categories', 
+    'guide1' => 'You Can Learn Anything With Us', 
+    'guide2' => 'Better Education For A Better Future', 
+    'teacher_guide' => 'Expert Teachers', 
+    'teacher_guide_words' => 'Trained with a very high level of accuracy and proficiency', 
+    'course_guide' => 'Our Courses', 
+    'course_guide_words' => 'We have many wonderful, useful and interesting courses', 
 
 
 
