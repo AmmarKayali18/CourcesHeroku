@@ -166,6 +166,8 @@ return [
     'course_guide_words' => 'We have many wonderful, useful and interesting courses',
     'details' => 'Details',
     'teacher_info' => 'Teacher Information',
+    'student_info' => 'Student Information',
+    'paid' => 'Paid',
 
 
 

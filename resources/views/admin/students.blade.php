@@ -5,6 +5,60 @@
 @extends('admin.admin_dashboard')
 @section ('content-page')
 
+<!-- Details Model -->
+<div class="modal fade" style="padding-left: 17px !important;" id="detailModal">
+
+    <div class="modal-dialog modal-dialog-centered" style="max-width: inherit !important;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@lang('trans.student_info')</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                        <table id="details_course" class="table  table-bordered ">
+                                            <thead>
+                                                <tr>
+                                                    <th id="img">@lang('trans.image')</th>
+                                                    <th>@lang('trans.course_title')</th>
+                                                    <th>@lang('trans.done')</th>
+                                                    <th>@lang('trans.paid')</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="details_course_tbody">
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th id="img">@lang('trans.image')</th>
+                                                    <th>@lang('trans.course_title')</th>
+                                                    <th>@lang('trans.done')</th>
+                                                    <th>@lang('trans.paid')</th>
+
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- Edit Model -->
 <div class="modal fade" id="editModal">
 
@@ -64,7 +118,7 @@
                                 <div class="form-group position-relative">
                                     <label>@lang('trans.password') </label>
                                     <input type="password" name="password" class="form-control"
-                                        placeholder="@lang('trans.password')" >
+                                        placeholder="@lang('trans.password')">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -131,6 +185,7 @@
                                     <th>@lang('trans.email')</th>
                                     <th>@lang('trans.phone')</th>
                                     <th>@lang('trans.address')</th>
+                                    <th>@lang('trans.details')</th>
                                     <th>@lang('trans.edit')</th>
                                 </tr>
                             </thead>
@@ -142,6 +197,8 @@
                                     <td>{{$student->email}}</td>
                                     <td>{{$student->mobile}}</td>
                                     <td>{{$student->address}}</td>
+                                    <td><button type="button" onclick="details({{$student->id}})"
+                                            class="btn mb-1 btn-flat btn-info">@lang('trans.details')</button></td>
                                     <td><button type="button" onclick="update({{$student->id}})"
                                             class="btn mb-1 btn-flat btn-success">@lang('trans.edit')</button></td>
                                 </tr>
@@ -154,6 +211,7 @@
                                     <th>@lang('trans.email')</th>
                                     <th>@lang('trans.phone')</th>
                                     <th>@lang('trans.address')</th>
+                                    <th>@lang('trans.details')</th>
                                     <th>@lang('trans.edit')</th>
                                 </tr>
                             </tfoot>
@@ -275,6 +333,40 @@ async function update(id) {
     $('#editModal').modal('show');
 }
 
+async function details(id) {
+    $.ajax({
+        url: "/user/details/student-courses/" + id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(res) {
+            $('#details_course tbody').empty();
+            for (let index = 0; index < res.length; index++) {
+                document.getElementById('details_course_tbody').insertAdjacentHTML("beforeend",
+                    "<tr> " +
+                    "  <td> <img src='" + res[index].course.image_path +
+                    "'  style='height: 50px; width: 50px;'  class=' rounded-circle mr-3' alt=''> </td>" +
+                    "    <td>" + res[index].course.title + "</td> " +
+
+                    "   <td> " +
+                    "@if( " + res[index].done + "== 0)" +
+                    " <span class='badge badge-danger px-2'>@lang('trans.no')</span>  @else <span class='badge badge-success px-2'>@lang('trans.yes')</span> @endif" +
+                    "    </td> " +
+
+                    "   <td> " +
+                    "@if( " + res[index].is_paid + "== '0')" +
+                    " <span class='badge badge-danger px-2'>@lang('trans.no')</span>  @else <span class='badge badge-success px-2'>@lang('trans.yes')</span> @endif" +
+                    "    </td> " +
+
+                    " </tr>");
+            }
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    });
+
+    $('#detailModal').modal('show');
+}
 
 $("#UpdateForm").submit(function(event) {
     event.preventDefault();

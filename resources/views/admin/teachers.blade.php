@@ -329,12 +329,9 @@
             type: 'GET',
             dataType: 'json',
             success: function(res) {
-                console.log(res);
-
                 
                 $('#details_course tbody').empty();
                 for (let index = 0; index < res.length; index++) {
-                    console.log("enter");
 
                     document.getElementById('details_course_tbody').insertAdjacentHTML("beforeend",
                         "<tr> " +

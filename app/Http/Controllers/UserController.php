@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Session;
 use App\Models\User;
+use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -35,11 +36,16 @@ class UserController extends Controller
 
     public function detailsCourses($id)
     {
-        return Course::where('teacher_id',$id)->with(['courseCategory','class'])->with(array('session' => function($query) {
+        return Course::where('teacher_id', $id)->with(['courseCategory', 'class'])->with(array('session' => function ($query) {
             $query->where('done', 1);
-        }))->with(array('userCourse' => function($query) {
+        }))->with(array('userCourse' => function ($query) {
             $query->where('continue', 1);
         }))->get();
+    }
+
+    public function detailsStudentCourses($id)
+    {
+       return  UserCourse::where('student_id', $id)->with('course')->get();
     }
 
     public function update(Request $request)
