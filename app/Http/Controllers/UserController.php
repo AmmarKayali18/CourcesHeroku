@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,30 +12,39 @@ use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     public function allAdmins()
-    {   
-        $admins = User::where('type','admin')->get();
+    {
+        $admins = User::where('type', 'admin')->get();
         return view('admin.admins', compact('admins'));
     }
 
     public function allTeachers()
-    {   
-        $teachers = User::where('type','teacher')->get();
+    {
+        $teachers = User::where('type', 'teacher')->get();
         return view('admin.teachers', compact('teachers'));
     }
     public function allStudents()
-    {   
-        $students = User::where('type','student')->get();
+    {
+        $students = User::where('type', 'student')->get();
         return view('admin.students', compact('students'));
     }
 
     public function details($id)
     {
-        return User::where('id',$id)->first();
+        return User::where('id', $id)->first();
+    }
+
+    public function detailsCourses($id)
+    {
+        return Course::where('teacher_id',$id)->with(['courseCategory','class'])->with(array('session' => function($query) {
+            $query->where('done', 1);
+        }))->with(array('userCourse' => function($query) {
+            $query->where('continue', 1);
+        }))->get();
     }
 
     public function update(Request $request)
     {
-      
+
         $request->validate([
             'Id' => 'required',
             'name_ar' => 'required|string',
@@ -75,18 +85,16 @@ class UserController extends Controller
             $file_name = time() . '.' . $file_extension;
 
             $type = $request->get('type');
-            $path = 'images/'.$type . "s";
+            $path = 'images/' . $type . "s";
             $request["file"]->move($path, $file_name);
-      
 
-            $request->merge(['image_path' => url('/') . "/images/".$type . "s/" . $file_name]);
 
+            $request->merge(['image_path' => url('/') . "/images/" . $type . "s/" . $file_name]);
         }
 
         User::find($userId)->fill($request->all())->save();
 
-        return ['message' =>  __('trans.update_'.$type)];
-
+        return ['message' =>  __('trans.update_' . $type)];
     }
 
 
@@ -115,21 +123,15 @@ class UserController extends Controller
             $image = $request->file("file");
             $file_extension = $image->getClientOriginalExtension();
             $file_name = time() . '.' . $file_extension;
-            $path = 'images/'.$type . "s";
+            $path = 'images/' . $type . "s";
             $request["file"]->move($path, $file_name);
-           
-            $request->merge(['image_path' => url('/') . "/images/".$type . "s/" . $file_name]);
 
+            $request->merge(['image_path' => url('/') . "/images/" . $type . "s/" . $file_name]);
         }
 
         User::create($request->all());
 
-       
-        return ['message' =>  __('trans.add_'.$type)];
-      
+
+        return ['message' =>  __('trans.add_' . $type)];
     }
-
-    
-
-    
 }

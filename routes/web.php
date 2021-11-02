@@ -32,6 +32,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::get('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('deleteUser');
 
             Route::get('/details/{id}', [App\Http\Controllers\UserController::class, 'details'])->name('detailsUser');
+            Route::get('/details/courses/{id}', [App\Http\Controllers\UserController::class, 'detailsCourses'])->name('detailsUserCourses');
         });
 
         /// categories course

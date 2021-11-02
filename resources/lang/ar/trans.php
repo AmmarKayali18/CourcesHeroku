@@ -26,13 +26,13 @@ return [
     'address_hint' => 'عنوانك الدائم',
     'phone_hint' => 'رقم موبايلك',
     'email_hint' => 'إيميلك',
-    
+
     'home' => 'الرئيسية',
     'my_courses' => 'كورساتي',
-    
+
     'ar' => 'العربية',
     'en' => 'الإنكليزية',
-    
+
     'have_account' => 'أملك حساب ',
     'need_account' => 'لا أملك حساب ',
 
@@ -102,10 +102,10 @@ return [
 
     'course_name_ar' => 'عنوان الكورس (العربية) ',
     'course_name_en' => 'عنوان الكورس (الإنكليزية) ',
-    
+
     'category_name_ar' => 'اسم الفئة (العربية) ',
     'category_name_en' => 'اسم الفئة (الإنكليزية) ',
-    
+
     'equipment_name_ar' => 'اسم القطعة (العربية) ',
     'equipment_name_en' => 'اسم القطعة (الإنكليزية) ',
 
@@ -122,7 +122,7 @@ return [
     'description_ar' => 'الوصف (العربية) ',
     'description_en' => 'الوصف (الإنكليزية) ',
 
-      
+
     'title' => 'العنوان',
     'teacher' => 'الأستاذ',
     'class' => 'القاعة',
@@ -152,22 +152,25 @@ return [
     'temporary_count' => 'العدد المستعار',
     'broken_count' => 'العدد التالف',
     'count_chairs' => 'عدد المقاعد',
-    'date' => 'التاريخ', 
-    'start_time' => 'توقيت البداية', 
-    'end_time' => 'توقيت النهاية', 
-    'course_title' => 'عنوان الكورس', 
-    'sessions_count_all' => 'عدد الجلسات الكلي', 
-    'sessions_count_left' => 'عدد الجلسات المتبقية', 
-    'set_session' => 'تثبيت جلسة', 
-    'present' => 'حضر الجلسة', 
-    'instructors' => 'المدربين', 
-    'categories' => 'الأنواع', 
-    'guide1' => 'يمكنك تعلم أي شيء معنا', 
-    'guide2' => 'تعليم أفضل لمستقبل أفضل', 
-    'teacher_guide' => 'مدربين خبراء', 
-    'course_guide' => 'كورساتنا', 
-    'teacher_guide_words' => 'مدربين على مستوى عالٍ جدًا من الدقة والإتقان', 
-    'course_guide_words' => 'لدينا العديد من الكورسات الرائعة والمفيدة والممتعة', 
+    'date' => 'التاريخ',
+    'start_time' => 'توقيت البداية',
+    'end_time' => 'توقيت النهاية',
+    'course_title' => 'عنوان الكورس',
+    'sessions_count_all' => 'عدد الجلسات الكلي',
+    'sessions_count_left' => 'عدد الجلسات المتبقية',
+    'set_session' => 'تثبيت جلسة',
+    'present' => 'حضر الجلسة',
+    'instructors' => 'المدربين',
+    'categories' => 'الأنواع',
+    'guide1' => 'يمكنك تعلم أي شيء معنا',
+    'guide2' => 'تعليم أفضل لمستقبل أفضل',
+    'teacher_guide' => 'مدربين خبراء',
+    'course_guide' => 'كورساتنا',
+    'teacher_guide_words' => 'مدربين على مستوى عالٍ جدًا من الدقة والإتقان',
+    'course_guide_words' => 'لدينا العديد من الكورسات الرائعة والمفيدة والممتعة',
+    'details' => 'التفاصيل',
+    'teacher_info' => 'معلومات الأستاذ',
+
 
 
 

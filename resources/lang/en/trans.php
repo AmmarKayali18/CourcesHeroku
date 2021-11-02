@@ -57,7 +57,7 @@ return [
     'update_session_title' => 'Edit Session Information',
     'picture' => 'Picture',
     'new_picture' => 'New Picture',
-    
+
     'add_admins' => 'Add Admin ',
     'add_teachers' => 'Add Teacher ',
     'add_students' => 'Add Student ',
@@ -96,18 +96,18 @@ return [
     'category_name' => 'Category Name',
     'course_name' => 'Course Name',
     'description' => 'Description',
-    
+
     'add' => 'Add',
 
     'course_name_ar' => 'Course title (Arabic)',
     'category_name_ar' => 'Category name (Arabic)',
-    
+
     'course_name_en' => 'Course title (English)',
     'category_name_en' => 'Category name (English)',
 
     'equipment_name_ar' => 'Equipment name (Arabic)',
     'equipment_name_en' => 'Equipment name (English)',
- 
+
     'class_name_ar' => 'Class name (Arabic)',
     'class_name_en' => 'Class name (English)',
 
@@ -118,7 +118,7 @@ return [
     'add_new_course' => 'Add New Course',
     'add_new_equipment' => 'Add New Equipment',
     'add_new_class' => 'Add New Class',
-    
+
 
 
     'title' => 'Title',
@@ -147,23 +147,25 @@ return [
     'sessions' => 'Sessions',
     'students_count' => 'Students count',
     'current_students_count' => 'Current Students count',
-    'select_course' => 'Course', 
-    'date' => 'Date', 
-    'start_time' => 'Start Time', 
-    'end_time' => 'End Time', 
-    'course_title' => 'Course Title', 
-    'sessions_count_all' => 'All sessions count', 
-    'sessions_count_left' => 'Sessions count left', 
-    'set_session' => 'Set session', 
-    'present' => 'Present', 
-    'instructors' => 'Instructors', 
-    'categories' => 'Categories', 
-    'guide1' => 'You Can Learn Anything With Us', 
-    'guide2' => 'Better Education For A Better Future', 
-    'teacher_guide' => 'Expert Teachers', 
-    'teacher_guide_words' => 'Trained with a very high level of accuracy and proficiency', 
-    'course_guide' => 'Our Courses', 
-    'course_guide_words' => 'We have many wonderful, useful and interesting courses', 
+    'select_course' => 'Course',
+    'date' => 'Date',
+    'start_time' => 'Start Time',
+    'end_time' => 'End Time',
+    'course_title' => 'Course Title',
+    'sessions_count_all' => 'All sessions count',
+    'sessions_count_left' => 'Sessions count left',
+    'set_session' => 'Set session',
+    'present' => 'Present',
+    'instructors' => 'Instructors',
+    'categories' => 'Categories',
+    'guide1' => 'You Can Learn Anything With Us',
+    'guide2' => 'Better Education For A Better Future',
+    'teacher_guide' => 'Expert Teachers',
+    'teacher_guide_words' => 'Trained with a very high level of accuracy and proficiency',
+    'course_guide' => 'Our Courses',
+    'course_guide_words' => 'We have many wonderful, useful and interesting courses',
+    'details' => 'Details',
+    'teacher_info' => 'Teacher Information',
 
 
 
