@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserCourse;
 use App\Models\UserEquipment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -165,7 +166,19 @@ class UserController extends Controller
             'user_course_id' => 'required',
             'equipment_id' => 'required',
         ]);
-
+        $temporary = 0;
+        $broken = 1;
+        if($request->get('temporary')){
+            $temporary = 1;
+            $broken = 0;
+        }
+        DB::table('equipments')
+            ->where('id', $request->get('equipment_id'))
+            ->update([
+                'count' => DB::raw('count -' . 1),
+                'temporary_count' => DB::raw('temporary_count +' . $temporary),
+                'broken_count' => DB::raw('broken_count +' . $broken),
+            ]);
         UserEquipment::create($request->all());
         return ['message' =>  __('trans.assign_equipment_success')];
 
