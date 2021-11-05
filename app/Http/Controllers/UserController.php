@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Equipment;
 use App\Models\Session;
 use App\Models\User;
 use App\Models\UserCourse;
+use App\Models\UserEquipment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -26,7 +28,8 @@ class UserController extends Controller
     public function allStudents()
     {
         $students = User::where('type', 'student')->get();
-        return view('admin.students', compact('students'));
+        $equipments = Equipment::where('count','>',0)->get();
+        return view('admin.students', compact('students','equipments'));
     }
 
     public function details($id)
@@ -46,6 +49,21 @@ class UserController extends Controller
     public function detailsStudentCourses($id)
     {
        return  UserCourse::where('student_id', $id)->with('course')->get();
+    }
+
+    public function detailsStudentTrue($id)
+    {
+        $equipments = UserCourse::where('student_id',$id)->with(array('equipments' => function ($query) {
+                $query->with('equipment');
+            }))->get();
+        $courses =  UserCourse::where('student_id', $id)->with(array('course' => function ($query) {
+            $query->where('equipments',1);
+        }))->get();
+        return [
+            'courses' => $courses,
+            'equipments' => $equipments,
+            'language' => app()->getLocale(),
+        ];
     }
 
     public function update(Request $request)
@@ -139,5 +157,17 @@ class UserController extends Controller
 
 
         return ['message' =>  __('trans.add_' . $type)];
+    }
+
+    public function addEquipment(Request $request)
+    {
+        $request->validate([
+            'user_course_id' => 'required',
+            'equipment_id' => 'required',
+        ]);
+
+        UserEquipment::create($request->all());
+        return ['message' =>  __('trans.assign_equipment_success')];
+
     }
 }

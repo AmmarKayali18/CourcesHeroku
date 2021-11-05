@@ -57,6 +57,95 @@
     </div>
 </div>
 
+<!-- Add Equipment Model -->
+<div class="modal fade" id="addEquipmentModal">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@lang('trans.add_equipments')</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <!--end form-->
+                <!-- </div>  -->
+                <form method="POST" id="addEquipmentForm" action="{{route('addEquipment')}}" name="register-form"
+                    enctype="multipart/form-data" class="nobottommargin">
+                    @csrf
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group position-relative">
+                                    <label>@lang('trans.select_category') <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="user_course_id" name="user_course_id">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group position-relative">
+                                    <label>@lang('trans.select_equipment') <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="equipment_id" name="equipment_id">
+                                        @foreach($equipments as $equipment)
+                                        <option value="{{ $equipment->id }}">{{ $equipment->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!--end col-->
+
+                            <!--end col-->
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-check mb-3">
+                                    <label class="form-check-label" style="font-size:16px !important;"> <span
+                                            class="text-danger">*</span>
+                                        <input type="checkbox" name="temporary" id="temporary" class="form-check-input"
+                                            value="yes">@lang('trans.temporary')</label>
+                                </div>
+
+                            </div>
+                            <!--end col-->
+
+                            <!--end col-->
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">@lang('trans.close')</button>
+                        <button type="submit" class="btn btn-primary">@lang('trans.add')</button>
+                    </div>
+                </form>
+
+
+                <div class="table-responsive">
+                    <table id="details_equipments" class="table  table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>@lang('trans.equipment')</th>
+                                <th>@lang('trans.temporary')</th>
+                            </tr>
+                        </thead>
+                        <tbody id="details_equipments_tbody">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>@lang('trans.equipment')</th>
+                                <th>@lang('trans.temporary')</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Edit Model -->
@@ -185,6 +274,7 @@
                                     <th>@lang('trans.email')</th>
                                     <th>@lang('trans.phone')</th>
                                     <th>@lang('trans.address')</th>
+                                    <th>@lang('trans.assign_equipment')</th>
                                     <th>@lang('trans.details')</th>
                                     <th>@lang('trans.edit')</th>
                                 </tr>
@@ -197,6 +287,9 @@
                                     <td>{{$student->email}}</td>
                                     <td>{{$student->mobile}}</td>
                                     <td>{{$student->address}}</td>
+                                    <td><button type="button" onclick="addEquipment({{$student->id}})"
+                                            class="btn mb-1 btn-flat btn-warning">@lang('trans.assign_equipment')</button>
+                                    </td>
                                     <td><button type="button" onclick="details({{$student->id}})"
                                             class="btn mb-1 btn-flat btn-info">@lang('trans.details')</button></td>
                                     <td><button type="button" onclick="update({{$student->id}})"
@@ -211,6 +304,7 @@
                                     <th>@lang('trans.email')</th>
                                     <th>@lang('trans.phone')</th>
                                     <th>@lang('trans.address')</th>
+                                    <th>@lang('trans.assign_equipment')</th>
                                     <th>@lang('trans.details')</th>
                                     <th>@lang('trans.edit')</th>
                                 </tr>
@@ -307,6 +401,65 @@
 
 
 <script>
+async function addEquipment(id) {
+
+
+    $.ajax({
+        url: "/user/details/student-courses-true/" + id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(res) {
+
+            if (res.courses.length == 0) {
+                var translate = (res.language == "ar") ? "لم يسجل الطالب في أي دورة" :
+                    "Student has not register in any course";
+
+
+                Notiflix.Notify.Failure(translate, {
+                    cssAnimationStyle: 'zoom',
+                    cssAnimationDuration: 500,
+                });
+            } else {
+                $('#details_equipments tbody').empty();
+                for (let i = 0; i < res.equipments.length; i++) {
+                    for (let index = 0; index < res.equipments[i].equipments.length; index++) {
+                        document.getElementById('details_equipments_tbody').insertAdjacentHTML(
+                            "beforeend",
+                            "<tr> " +
+                            "  <td>" + res.equipments[i].equipments[index].equipment.name +
+                            "</td> " +
+                            "   <td> " +
+                            " <span class='badge badge-warning py-2 px-3' style='font-size:15px !important;'>" +
+                            res.equipments[i].equipments[index].temporary + "</span>" +
+                            "    </td> " +
+                            " </tr>");
+                    }
+                }
+                $('#user_course_id')
+                    .find('option')
+                    .remove()
+                    .end();
+                for (let i = 0; i < res.courses.length; i++) {
+                    if (res.courses[i].course) {
+                        $('#user_course_id').append(
+                            `<option value="${res.courses[i].id}"> ${res.courses[i].course.title}</option>`
+                        );
+                    }
+                }
+
+
+                $("#studentId").val(id);
+                $('#addEquipmentModal').modal('show');
+            }
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    });
+
+
+
+}
 async function update(id) {
     $.ajax({
         url: "/user/details/" + id,
@@ -401,6 +554,37 @@ $("#UpdateForm").submit(function(event) {
 });
 
 $("#addUserForm").submit(function(event) {
+    event.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        enctype: 'multipart/form-data',
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        success: function(res) {
+            Notiflix.Notify.Success(res.message, {
+                cssAnimationStyle: 'zoom',
+                cssAnimationDuration: 500,
+            });
+            setTimeout(() => {
+                window.location.href = "{{route('all-students')}}";
+            }, 2000);
+        },
+        error: function(res) {
+            var ob = res.responseJSON.errors;
+            var keys = Object.keys(ob);
+            for (let index = 0; index < keys.length; index++) {
+                Notiflix.Notify.Failure(ob[keys[index]][0], {
+                    cssAnimationStyle: 'zoom',
+                    cssAnimationDuration: 500,
+                });
+            }
+        }
+    });
+});
+
+$("#addEquipmentForm").submit(function(event) {
     event.preventDefault();
     $.ajax({
         type: 'POST',

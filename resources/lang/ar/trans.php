@@ -172,6 +172,14 @@ return [
     'teacher_info' => 'معلومات الأستاذ',
     'student_info' => 'معلومات الطالب',
     'paid' => 'تم الدفع',
+    'assign_equipment' => 'إسناد تجهيز',
+    'select_equipment' => 'التجهيز',
+    'temporary' => 'مؤقتاً',
+    'assign_equipment_success' => 'تم إسناد التجهيز بنجاح',
+    'equipment' => 'التجهيز',
+
+    'not_register' => 'لم يسجل الطالب في أي دورة',
+
 
 
 

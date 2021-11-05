@@ -30,4 +30,9 @@ class UserCourse extends Model
     {
         return $this->belongsTo(Course::class,'course_id');
     }
+
+    public function equipments()
+    {
+        return $this->hasMany(UserEquipment::class);
+    }
 }

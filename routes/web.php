@@ -30,10 +30,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::post('/add', [App\Http\Controllers\UserController::class, 'store'])->name('storeUser');
             Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('updateUser');
             Route::get('/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('deleteUser');
+            Route::post('/add/equipment', [App\Http\Controllers\UserController::class, 'addEquipment'])->name('addEquipment');
 
             Route::get('/details/{id}', [App\Http\Controllers\UserController::class, 'details'])->name('detailsUser');
             Route::get('/details/courses/{id}', [App\Http\Controllers\UserController::class, 'detailsCourses'])->name('detailsUserCourses');
             Route::get('/details/student-courses/{id}', [App\Http\Controllers\UserController::class, 'detailsStudentCourses'])->name('detailsStudentCourses');
+            Route::get('/details/student-courses-true/{id}', [App\Http\Controllers\UserController::class, 'detailsStudentTrue'])->name('detailsStudentTrue');
         });
 
         /// categories course

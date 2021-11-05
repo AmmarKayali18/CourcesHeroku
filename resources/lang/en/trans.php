@@ -168,6 +168,12 @@ return [
     'teacher_info' => 'Teacher Information',
     'student_info' => 'Student Information',
     'paid' => 'Paid',
+    'assign_equipment' => 'Assign Equipment',
+    'select_equipment ' => 'Equipment',
+    'temporary' => 'Temporarily',
+    'assign_equipment_success' => 'Successfully Assign Equipment.',
+    'equipment' => 'Equipment',
+    'not_register' => 'Student has not register in any course',
 
 
 
