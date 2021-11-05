@@ -169,7 +169,7 @@ return [
     'student_info' => 'Student Information',
     'paid' => 'Paid',
     'assign_equipment' => 'Assign Equipment',
-    'select_equipment ' => 'Equipment',
+    'select_equipment' => 'Equipment',
     'temporary' => 'Temporarily',
     'assign_equipment_success' => 'Successfully Assign Equipment.',
     'equipment' => 'Equipment',
