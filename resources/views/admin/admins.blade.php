@@ -5,51 +5,63 @@
 @extends('admin.admin_dashboard')
 @section ('content-page')
 <div class="row">
-    <div class="col-lg-3 col-sm-6">
+    <div class="col-lg-2 col-sm-6">
         <div class="card gradient-1">
             <div class="card-body">
-                <h3 class="card-title text-white">Products Sold</h3>
+                <h3 class="card-title text-white">@lang('trans.categories')</h3>
                 <div class="d-inline-block">
-                    <h2 class="text-white">4565</h2>
-                    <p class="text-white mb-0">Jan - March 2019</p>
+                    <h2 class="text-white">{{$categoriesCount}}</h2>
+                    <!-- <p class="text-white mb-0">Jan - March 2019</p> -->
                 </div>
-                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-sm-6">
-        <div class="card gradient-2">
-            <div class="card-body">
-                <h3 class="card-title text-white">Net Profit</h3>
-                <div class="d-inline-block">
-                    <h2 class="text-white">$ 8541</h2>
-                    <p class="text-white mb-0">Jan - March 2019</p>
-                </div>
-                <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+                <!-- <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span> -->
             </div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="card gradient-3">
             <div class="card-body">
-                <h3 class="card-title text-white">New Customers</h3>
+                <h3 class="card-title text-white">@lang('trans.courses_current')</h3>
                 <div class="d-inline-block">
-                    <h2 class="text-white">4565</h2>
-                    <p class="text-white mb-0">Jan - March 2019</p>
+                    <h2 class="text-white">{{$coursesUnfinishedCount}}</h2>
+                    <!-- <p class="text-white mb-0">Jan - March 2019</p> -->
                 </div>
-                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                <!-- <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span> -->
             </div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
+        <div class="card gradient-9">
+            <div class="card-body">
+                <h3 class="card-title text-white">@lang('trans.courses_finished')</h3>
+                <div class="d-inline-block">
+                    <h2 class="text-white">{{$coursesFinishedCount}}</h2>
+                    <!-- <p class="text-white mb-0">Jan - March 2019</p> -->
+                </div>
+                <!-- <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-6">
+        <div class="card gradient-7">
+            <div class="card-body">
+                <h3 class="card-title text-white">@lang('trans.students')</h3>
+                <div class="d-inline-block">
+                    <h2 class="text-white">{{$studentsCount}}</h2>
+                    <!-- <p class="text-white mb-0">Jan - March 2019</p> -->
+                </div>
+                <!-- <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-6">
         <div class="card gradient-4">
             <div class="card-body">
-                <h3 class="card-title text-white">Customer Satisfaction</h3>
+                <h3 class="card-title text-white">@lang('trans.teachers')</h3>
                 <div class="d-inline-block">
-                    <h2 class="text-white">99%</h2>
-                    <p class="text-white mb-0">Jan - March 2019</p>
+                    <h2 class="text-white">{{$teachersCount}}</h2>
+                    <!-- <p class="text-white mb-0">Jan - March 2019</p> -->
                 </div>
-                <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                <!-- <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span> -->
             </div>
         </div>
     </div>

@@ -179,7 +179,8 @@ return [
     'equipment' => 'التجهيز',
 
     'not_register' => 'لم يسجل الطالب في أي دورة',
-
+    'courses_current' => 'الكورسات الحالية',
+    'courses_finished' => 'الكورسات المنتهية',
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseCategory;
 use App\Models\Equipment;
 use App\Models\Session;
 use App\Models\User;
@@ -18,7 +19,20 @@ class UserController extends Controller
     public function allAdmins()
     {
         $admins = User::where('type', 'admin')->get();
-        return view('admin.admins', compact('admins'));
+        $teachersCount = User::where('type', 'teacher')->get()->count();
+        $studentsCount = User::where('type', 'teacher')->get()->count();
+        $categoriesCount = CourseCategory::all()->count();
+        $coursesUnfinishedCount = Course::where('done', 1)->get()->count();
+        $coursesFinishedCount = Course::where('done', 0)->get()->count();
+        // return [
+        //     '1' => $teachersCount,
+        //     '2' => $studentsCount,
+        //     '3' => $categoriesCount,
+        //     '4' => $coursesUnfinishedCount,
+        //     '5' => $coursesFinishedCount,
+
+        // ];
+        return view('admin.admins', compact('admins', 'teachersCount', 'studentsCount', 'coursesUnfinishedCount', 'coursesFinishedCount', 'categoriesCount'));
     }
 
     public function allTeachers()
@@ -29,8 +43,8 @@ class UserController extends Controller
     public function allStudents()
     {
         $students = User::where('type', 'student')->get();
-        $equipments = Equipment::where('count','>',0)->get();
-        return view('admin.students', compact('students','equipments'));
+        $equipments = Equipment::where('count', '>', 0)->get();
+        return view('admin.students', compact('students', 'equipments'));
     }
 
     public function details($id)
@@ -49,16 +63,16 @@ class UserController extends Controller
 
     public function detailsStudentCourses($id)
     {
-       return  UserCourse::where('student_id', $id)->with('course')->get();
+        return  UserCourse::where('student_id', $id)->with('course')->get();
     }
 
     public function detailsStudentTrue($id)
     {
-        $equipments = UserCourse::where('student_id',$id)->with(array('equipments' => function ($query) {
-                $query->with('equipment');
-            }))->get();
+        $equipments = UserCourse::where('student_id', $id)->with(array('equipments' => function ($query) {
+            $query->with('equipment');
+        }))->get();
         $courses =  UserCourse::where('student_id', $id)->with(array('course' => function ($query) {
-            $query->where('equipments',1);
+            $query->where('equipments', 1);
         }))->get();
         return [
             'courses' => $courses,
@@ -168,7 +182,7 @@ class UserController extends Controller
         ]);
         $temporary = 0;
         $broken = 1;
-        if($request->get('temporary')){
+        if ($request->get('temporary')) {
             $temporary = 1;
             $broken = 0;
         }
@@ -181,6 +195,5 @@ class UserController extends Controller
             ]);
         UserEquipment::create($request->all());
         return ['message' =>  __('trans.assign_equipment_success')];
-
     }
 }

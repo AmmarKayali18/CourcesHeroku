@@ -173,6 +173,8 @@ return [
     'temporary' => 'Temporarily',
     'assign_equipment_success' => 'Successfully Assign Equipment.',
     'equipment' => 'Equipment',
+    'courses_current' => 'Current Courses',
+    'courses_finished' => 'Finished Courses',
     'not_register' => 'Student has not register in any course',
 
 
