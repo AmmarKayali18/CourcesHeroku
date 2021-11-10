@@ -175,7 +175,15 @@ return [
     'equipment' => 'Equipment',
     'courses_current' => 'Current Courses',
     'courses_finished' => 'Finished Courses',
+    'courses_categories' => 'Categories of courses',
     'not_register' => 'Student has not register in any course',
+    'course' => 'Course',
+    'usefull_links' => 'Usefull Links',
+    'start_your_study' => 'Start Your Study Now',
+    'start_your_study_sentance' => 'Start small, think big, don\'t worry about many things at the same time, start with the simple things first and progress to the more complex things.',
+    'categories_sentance' => 'When you get to the depth of the meaning of the word success, you find that it simply means persistence',
+    'footer_sentance' => 'If you ever thought you had had enough of success, you are in the wrong place, don\'t stop and look for more',
+    'instructors_sentance' => 'Organized accomplishments are the results of the combined effort of everyone in them',
 
 
 

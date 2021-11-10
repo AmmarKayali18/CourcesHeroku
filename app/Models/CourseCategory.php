@@ -19,4 +19,9 @@ class CourseCategory extends Model implements TranslatableContract
     protected $fillable = [
         'image_path',
     ];
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }

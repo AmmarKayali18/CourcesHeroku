@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,7 +12,15 @@ class CategoryController extends Controller
     public function allCategories()
     {
         $teachers = User::where('type','teacher')->get();
-        return view('courses', compact('teachers'));
+        $categories = CourseCategory::with(array('courses' => function ($query) {
+            $query->where('done', 0);
+        }))->get();
+        $teachersCount = User::where('type', 'teacher')->get()->count();
+        $studentsCount = User::where('type', 'student')->get()->count();
+        $categoriesCount = CourseCategory::all()->count();
+        $coursesCount = Course::all()->count();
+        
+        return view('categories', compact('categories','teachers','teachersCount','studentsCount','categoriesCount','coursesCount'));
     }
 
     public function categories()

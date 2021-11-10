@@ -20,18 +20,11 @@ class UserController extends Controller
     {
         $admins = User::where('type', 'admin')->get();
         $teachersCount = User::where('type', 'teacher')->get()->count();
-        $studentsCount = User::where('type', 'teacher')->get()->count();
+        $studentsCount = User::where('type', 'student')->get()->count();
         $categoriesCount = CourseCategory::all()->count();
         $coursesUnfinishedCount = Course::where('done', 1)->get()->count();
         $coursesFinishedCount = Course::where('done', 0)->get()->count();
-        // return [
-        //     '1' => $teachersCount,
-        //     '2' => $studentsCount,
-        //     '3' => $categoriesCount,
-        //     '4' => $coursesUnfinishedCount,
-        //     '5' => $coursesFinishedCount,
 
-        // ];
         return view('admin.admins', compact('admins', 'teachersCount', 'studentsCount', 'coursesUnfinishedCount', 'coursesFinishedCount', 'categoriesCount'));
     }
 

@@ -30,12 +30,13 @@
     <!-- FLEXSLIDER -->
     <link href="{{asset('css/flexslider.css')}}" rel="stylesheet" type="text/css" />
     <!-- Main Css -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" id="theme-opt" />
+
+    <link href="{{asset("css/style-{$dir}.css")}}" rel="stylesheet" type="text/css" id="theme-opt">
     <link href="{{asset('css/colors/default.css')}}" rel="stylesheet" id="color-opt">
     <style>
     * {
         font-family: 'Tajawal', sans-serif !important;
-        font-size: 15px !important;
+        /* font-size: 15px !important; */
         direction: <?php echo $dir;
         ?> !important;
     }
@@ -59,12 +60,12 @@
     <header id="topnav" class="defaultscroll sticky">
         <div class="container">
             <!-- Logo container-->
-            <div>
+            <!-- <div>
                 <a class="logo" href="index.html">
                     <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
                     <img src="images/logo-light.png" class="l-light" height="24" alt="">
                 </a>
-            </div>
+            </div> -->
             <!-- <div class="buy-button">
                     <a href="https://1.envato.market/4n73n" target="_blank">
                         <div class="btn btn-primary login-btn-primary">Buy Now</div>
@@ -202,7 +203,8 @@
                                     alt="">
                             </div>
 
-                            <h4 class="mt-3"><a href="#courses" class="title text-dark mouse-down">  @lang('trans.course_guide')</a></h4>
+                            <h4 class="mt-3"><a href="#courses" class="title text-dark mouse-down">
+                                    @lang('trans.course_guide')</a></h4>
                             <p class="text-muted">@lang('trans.course_guide_words') </p>
                             <img src="images/icon/graduation-hat.svg" class="full-img" height="300" alt="">
                         </div>
@@ -217,7 +219,8 @@
                                 <img src="{{asset('images/icon/ai.svg')}}" class="avatar avatar-small" alt="">
                             </div>
 
-                            <h4 class="mt-3"><a href="#instructors" class="title text-dark mouse-down"> @lang('trans.teacher_guide')</a></h4>
+                            <h4 class="mt-3"><a href="#instructors" class="title text-dark mouse-down">
+                                    @lang('trans.teacher_guide')</a></h4>
                             <p class="text-muted">@lang('trans.teacher_guide_words') </p>
                             <img src="images/icon/ai.svg" class="full-img" height="300" alt="">
                         </div>
@@ -267,9 +270,7 @@
                 <div class="col-12 text-center">
                     <div class="section-title mb-4 pb-2">
                         <h1 class=" mb-4">@lang('trans.instructors')</h1>
-                        <!-- <p class="text-muted para-desc mx-auto mb-0">Start working with <span
-                                class="text-primary font-weight-bold">Landrick</span> that can provide everything you
-                            need to generate awareness, drive traffic, connect.</p> -->
+                        <p class="text-muted para-desc mx-auto mb-0">@lang('trans.instructors_sentance')</p>
                     </div>
                 </div>
                 <!--end col-->
@@ -299,7 +300,7 @@
                 </div>
                 <!--end col-->
                 @endforeach
-               
+
 
             </div>
             <!--end row-->
@@ -317,16 +318,15 @@
             <div class="row align-items-center">
                 <div class="col-lg-8 col-md-7 col-12">
                     <div class="section-title">
-                        <h4 class="title title-dark text-white mb-4">Admission Now</h4>
-                        <p class="para-desc para-dark mb-0 text-light">Launch your campaign and benefit from our
-                            expertise on designing and managing conversion centered bootstrap4 html page.</p>
+                        <h4 class="title title-dark text-white mb-4">@lang('trans.start_your_study')</h4>
+                        <p class="para-desc para-dark mb-0 text-light">@lang('trans.start_your_study_sentance')</p>
                     </div>
                     <div class="row" id="counter">
                         <div class="col-md-3 col-6 mt-4 pt-2">
                             <div class="counter-box">
                                 <i class="mdi mdi-school-outline title-dark text-light h1"></i>
                                 <h2 class="mb-0 text-white title-dark mt-2"><span class="counter-value"
-                                        data-count="25">3</span>K</h2>
+                                        data-count="{{$studentsCount}}"></span></h2>
                                 <h6 class="counter-head title-dark text-light">@lang('trans.students')</h6>
                             </div>
                             <!--end counter box-->
@@ -337,7 +337,7 @@
                             <div class="counter-box">
                                 <i class="mdi mdi-book-open-variant title-dark text-light h1"></i>
                                 <h2 class="mb-0 text-white title-dark mt-2"><span class="counter-value"
-                                        data-count="70">1</span>+</h2>
+                                        data-count="{{$coursesCount}}"></span>+</h2>
                                 <h6 class="counter-head title-dark text-light">@lang('trans.courses')</h6>
                             </div>
                             <!--end counter box-->
@@ -348,7 +348,7 @@
                             <div class="counter-box">
                                 <i class="mdi mdi-account title-dark text-light h1"></i>
                                 <h2 class="mb-0 text-white title-dark mt-2"><span class="counter-value"
-                                        data-count="55">0</span>+</h2>
+                                        data-count="{{$teachersCount}}"></span></h2>
                                 <h6 class="counter-head title-dark text-light">@lang('trans.teachers')</h6>
                             </div>
                             <!--end counter box-->
@@ -359,7 +359,7 @@
                             <div class="counter-box">
                                 <i class="mdi mdi-language-swift title-dark text-light h1"></i>
                                 <h2 class="mb-0 text-white title-dark mt-2"><span class="counter-value"
-                                        data-count="25">3</span>+</h2>
+                                        data-count="{{$categoriesCount}}"></span>+</h2>
                                 <h6 class="counter-head title-dark text-light">@lang('trans.categories')</h6>
                             </div>
                             <!--end counter box-->
@@ -372,8 +372,15 @@
 
                 <div class="col-lg-4 col-md-5 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                     <div class="card border-0 rounded">
-                        <div class="card-body">
-
+                        <div class="card-body" >
+                        <div class="position-relative d-block overflow-hidden">
+                                <img src="{{asset('images/start_study.jpg')}}"
+                                    style="height: 262.5px !important;width: 350px !important;"
+                                    class="img-fluid rounded-top mx-auto" alt="">
+                                <div class="overlay-work bg-dark"></div>
+                                <a href="javascript:void(0)" class="text-white h6 preview">Preview Now <i
+                                        class="mdi mdi-chevron-right"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -392,11 +399,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-12 mb-0 mb-md-6 pb-0 pb-md-2">
-                    <a href="#" class="logo-footer">
+                    <!-- <a href="#" class="logo-footer">
                         <img src="images/logo-light.png" height="24" alt="">
-                    </a>
-                    <p class="mt-4">Start working with Landrick that can provide everything you need to generate
-                        awareness, drive traffic, connect.</p>
+                    </a> -->
+                    <p class="mt-4">@lang('trans.footer_sentance')</p>
                     <ul class="list-unstyled social-icon social mb-0 mt-4">
                         <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
                                     data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
@@ -412,30 +418,35 @@
                 <!--end col-->
 
                 <div class="col-lg-6 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                    <h4 class="text-light footer-head">Usefull Links</h4>
+                    <h4 class="text-light footer-head">@lang('trans.usefull_links')</h4>
                     <ul class="list-unstyled footer-list mt-4">
-                    <li><a class="text-foot" href="{{route('all-categories')}}" class="mouse-down"><i class="mdi mdi-chevron-right mr-1"></i>@lang('trans.home')</a></li>
-                    <li><a class="text-foot" href="{{route('my-courses')}}"><i class="mdi mdi-chevron-right mr-1"></i>@lang('trans.my_courses')</a></li>
+                        <li><a class="text-foot" href="{{route('all-categories')}}" class="mouse-down"><i
+                                    class="mdi mdi-chevron-right mr-1"></i>@lang('trans.home')</a></li>
+                        <li><a class="text-foot" href="{{route('my-courses')}}"><i
+                                    class="mdi mdi-chevron-right mr-1"></i>@lang('trans.my_courses')</a></li>
 
-                    @guest
-                    <li><a class="text-foot" href="{{route('login')}}"><i class="mdi mdi-chevron-right mr-1"></i>@lang('trans.login')</a></li>
-                    <li><a class="text-foot" href="{{route('register')}}"><i class="mdi mdi-chevron-right mr-1"></i>@lang('trans.register')</a></li>
+                        @guest
+                        <li><a class="text-foot" href="{{route('login')}}"><i
+                                    class="mdi mdi-chevron-right mr-1"></i>@lang('trans.login')</a></li>
+                        <li><a class="text-foot" href="{{route('register')}}"><i
+                                    class="mdi mdi-chevron-right mr-1"></i>@lang('trans.register')</a></li>
 
-                    @else
-                    <li><a class="text-foot" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        @else
+                        <li><a class="text-foot" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i
-                                class="fe fe-power"></i><span><i class="mdi mdi-chevron-right mr-1"></i>@lang('trans.logout')</span></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                    @endguest
-                
+                                    class="fe fe-power"></i><span><i
+                                        class="mdi mdi-chevron-right mr-1"></i>@lang('trans.logout')</span></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                        @endguest
+
                     </ul>
                 </div>
                 <!--end col-->
 
-               
+
                 <!--end col-->
             </div>
             <!--end row-->
