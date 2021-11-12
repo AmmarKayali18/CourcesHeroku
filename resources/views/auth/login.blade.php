@@ -23,13 +23,13 @@
     <link href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     <!-- Main Css -->
-    <link href="css/style.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="{{asset("css/style-{$dir}.css")}}" rel="stylesheet" type="text/css" id="theme-opt">
     <link href="css/colors/default.css" rel="stylesheet" id="color-opt">
     <style>
     * {
         font-family: 'Tajawal', sans-serif !important;
         /* font-size: 15px !important; */
-      
+
 
     }
     </style>
@@ -51,7 +51,7 @@
                                         <h1>@lang('trans.login')</h1>
                                     </div>
                                 </div>
-                         
+
                                 <!--end col-->
                                 <div class="col-md-12">
                                     <div class="form-group position-relative">
