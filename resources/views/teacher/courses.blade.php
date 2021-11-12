@@ -240,41 +240,51 @@ th {
 
 
 <script>
+
+
 async function update(id) {
     $.ajax({
         url: "/details-course-teacher/" + id,
         type: 'GET',
         dataType: 'json',
         success: function(res) {
+            if ((res.course == null)) {
+                var translate = (res.language == "ar") ? "تم الإنتهاء من هذا الكورس" :
+                    "This course has been completed";
+                Notiflix.Notify.Failure(translate, {
+                    cssAnimationStyle: 'zoom',
+                    cssAnimationDuration: 500,
+                });
+            } else {
 
-            // const element = document.getElementById('tag-id');
-            console.log(res);
-            var node= document.getElementById("tag_id");
-            node.querySelectorAll('*').forEach(n => n.remove());
-            for (let index = 0; index < res.user_course.length; index++) {
-                document.getElementById('tag_id').insertAdjacentHTML("beforeend",
-                    " <div class='row'> " 
-                    +"    <div class='col-md-6'> " 
-                    +"   <div class='form-group position-relative'> " 
-                    + "   <label>" +res.user_course[index].user.name +"</label> " 
-                    + " <input hidden id='UpdateId' name='Id' value='"+res.id+"'> "
-                    +
-                    " </div> " 
-                    +  " </div>  " +
-                    " <div class='col-md-6'>  " +
-                    "     <div class='form-check mb-3'>  " +
-                    "         <label class='form-check-label'> <span class='text-danger'>*</span>  " +
-                    "            <input type='checkbox' name='present_"+index+"' id='present_"+index+"' class='form-check-input'  " +
-                    "                >   @lang('trans.present')  </label>  " +
-                    "      </div> "
+                var node = document.getElementById("tag_id");
+                node.querySelectorAll('*').forEach(n => n.remove());
+                for (let index = 0; index < res.course.user_course.length; index++) {
+                    document.getElementById('tag_id').insertAdjacentHTML("beforeend",
+                        " <div class='row'> " +
+                        "    <div class='col-md-6'> " +
+                        "   <div class='form-group position-relative'> " +
+                        "   <label>" + res.course.user_course[index].user.name + "</label> " +
+                        " <input hidden id='UpdateId' name='Id' value='" + res.course.id + "'> " +
+                        " </div> " +
+                        " </div>  " +
+                        " <div class='col-md-6'>  " +
+                        "     <div class='form-check mb-3'>  " +
+                        "         <label class='form-check-label'> <span class='text-danger'>*</span>  " +
+                        "            <input type='checkbox' name='present[]' id='present_" + res.course
+                        .user_course[index].user.id + "' class='form-check-input' value='" + res.course
+                        .user_course[index].user.id + "' " +
+                        "                >   @lang('trans.present')  </label>  " +
+                        "      </div> " +
+                        "   </div> " +
+                        "    </div>");
+                }
 
-                    +
-                    "   </div> "
+                $("#UpdateId").val(id);
 
-               
-                    +"    </div>");
+                $('#editModal').modal('show');
             }
-         
+
         },
         error: function(e) {
             console.log(e);
@@ -282,9 +292,7 @@ async function update(id) {
     });
 
 
-    $("#UpdateId").val(id);
 
-    $('#editModal').modal('show');
 }
 
 
@@ -319,7 +327,5 @@ $("#UpdateForm").submit(function(event) {
         }
     });
 });
-
-
 </script>
 @endsection ('content-page')

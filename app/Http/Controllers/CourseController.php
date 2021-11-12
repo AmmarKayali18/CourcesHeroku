@@ -14,48 +14,53 @@ class CourseController extends Controller
     public function teacherCourses()
     {
         $userId = Auth::id();
-        $courses =  Course::where('teacher_id',$userId)->with(['courseCategory','class'])->with(array('session' => function($query) {
+        $courses =  Course::where('teacher_id', $userId)->with(['courseCategory', 'class'])->with(array('session' => function ($query) {
             $query->where('done', 1);
-        }))->with(array('userCourse' => function($query) {
+        }))->with(array('userCourse' => function ($query) {
             $query->where('continue', 1);
         }))->get();
         // return $courses;
-        return view('teacher.courses',compact('courses'));
+        return view('teacher.courses', compact('courses'));
     }
 
     public function detailsTeacherCourses($id)
     {
-        return Course::where('id', $id)->with(array('userCourse' => function($query) {
-            $query->where('continue', 1)->with('user');
+        $course =  Course::where([['id', $id], ['done', 0]])->with(array('userCourse' => function ($query) {
+            $query->with('user');
         }))->first();
+        return
+            [
+                'course' => $course,
+                'language' => app()->getLocale()
+            ];
     }
 
 
     public function myCourses(Request $request)
     {
-        $courses = Course::where('id',$request->get('id'))->with(['courseCategory','teacher','class'])->get();
+        $courses = Course::where('id', $request->get('id'))->with(['courseCategory', 'teacher', 'class'])->get();
         $categories = CourseCategory::all();
-        $teachers = User::where('type','teacher')->get();
+        $teachers = User::where('type', 'teacher')->get();
         $classes = ClassHall::all();
-        return view('my_courses',compact('courses','categories','teachers','classes'));
+        return view('my_courses', compact('courses', 'categories', 'teachers', 'classes'));
     }
 
     public function allCoursesStudent()
     {
-        $courses = Course::with(['courseCategory','teacher','class'])->get();
+        $courses = Course::with(['courseCategory', 'teacher', 'class'])->get();
         $categories = CourseCategory::all();
-        $teachers = User::where('type','teacher')->get();
+        $teachers = User::where('type', 'teacher')->get();
         $classes = ClassHall::all();
-        return view('courses',compact('courses','categories','teachers','classes'));
+        return view('courses', compact('courses', 'categories', 'teachers', 'classes'));
     }
-    
+
     public function allCourses()
     {
-        $courses = Course::with(['courseCategory','teacher','class'])->get();
+        $courses = Course::with(['courseCategory', 'teacher', 'class'])->get();
         $categories = CourseCategory::all();
-        $teachers = User::where('type','teacher')->get();
+        $teachers = User::where('type', 'teacher')->get();
         $classes = ClassHall::all();
-        return view('admin.courses',compact('courses','categories','teachers','classes'));
+        return view('admin.courses', compact('courses', 'categories', 'teachers', 'classes'));
     }
 
     public function details($id)
@@ -124,7 +129,7 @@ class CourseController extends Controller
             'start' => 'required',
             'end' => 'required',
             'price' => 'required',
-        
+
         ]);
 
         $obj = [];
