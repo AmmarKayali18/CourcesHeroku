@@ -6,6 +6,7 @@ use App\Models\ClassHall;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\User;
+use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,11 +39,14 @@ class CourseController extends Controller
 
     public function myCourses(Request $request)
     {
-        $courses = Course::where('id', $request->get('id'))->with(['courseCategory', 'teacher', 'class'])->get();
-        $categories = CourseCategory::all();
-        $teachers = User::where('type', 'teacher')->get();
-        $classes = ClassHall::all();
-        return view('my_courses', compact('courses', 'categories', 'teachers', 'classes'));
+        $userId =  Auth::id();
+        $courses = UserCourse::where('student_id', $userId)->with(['course'])->get();
+        $teachersCount = User::where('type', 'teacher')->get()->count();
+        $studentsCount = User::where('type', 'student')->get()->count();
+        $categoriesCount = CourseCategory::all()->count();
+        $coursesCount = Course::all()->count();
+     
+        return view('my_courses', compact('courses','teachersCount','studentsCount','categoriesCount','coursesCount'));
     }
 
     public function allCoursesStudent(Request $request)
