@@ -94,7 +94,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     Route::group(['middleware' => ['auth', 'studentRedirect']], function () {
         Route::get('/my-courses', [App\Http\Controllers\CourseController::class, 'myCourses'])->name('my-courses');
         // Route::get('/teachers', [App\Http\Controllers\UserController::class, 'allTeachers'])->name('all-teachers');
-        Route::get('/register-course', [App\Http\Controllers\UserController::class, 'registerCourse'])->name('register-course');
+        Route::get('/subscription-course', [App\Http\Controllers\UserController::class, 'subscriptionCourse'])->name('subscription-course');
     });
 
 

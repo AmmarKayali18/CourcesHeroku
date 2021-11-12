@@ -189,4 +189,16 @@ class UserController extends Controller
         UserEquipment::create($request->all());
         return ['message' =>  __('trans.assign_equipment_success')];
     }
+
+    public function subscriptionCourse(Request $request)
+    {
+        $courseId = $request->get('id');
+        $course = Course::where('id',$courseId)->get()->first();
+        $teachersCount = User::where('type', 'teacher')->get()->count();
+        $studentsCount = User::where('type', 'student')->get()->count();
+        $categoriesCount = CourseCategory::all()->count();
+        $coursesCount = Course::all()->count();
+        return view('subscription', compact('course','teachersCount','studentsCount','categoriesCount','coursesCount'));
+
+    }
 }

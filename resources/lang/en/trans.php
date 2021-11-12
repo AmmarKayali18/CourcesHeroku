@@ -184,7 +184,9 @@ return [
     'categories_sentance' => 'When you get to the depth of the meaning of the word success, you find that it simply means persistence',
     'footer_sentance' => 'If you ever thought you had had enough of success, you are in the wrong place, don\'t stop and look for more',
     'instructors_sentance' => 'Organized accomplishments are the results of the combined effort of everyone in them',
-    'save_session_count' => 'Session saved Number.',
+    'save_session_count' => 'Session saved Number',
+    'show_courses' => 'Show courses',
+    'subscription' => 'Subscription',
 
 
 

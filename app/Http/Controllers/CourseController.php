@@ -45,13 +45,17 @@ class CourseController extends Controller
         return view('my_courses', compact('courses', 'categories', 'teachers', 'classes'));
     }
 
-    public function allCoursesStudent()
+    public function allCoursesStudent(Request $request)
     {
-        $courses = Course::with(['courseCategory', 'teacher', 'class'])->get();
-        $categories = CourseCategory::all();
+        $categoryId = $request->get('id');
+        $courses = Course::where('course_category_id',$categoryId)->with(['courseCategory', 'teacher', 'class'])->get();
+        $category = CourseCategory::where('id',$categoryId)->get()->first();
         $teachers = User::where('type', 'teacher')->get();
-        $classes = ClassHall::all();
-        return view('courses', compact('courses', 'categories', 'teachers', 'classes'));
+        $teachersCount = User::where('type', 'teacher')->get()->count();
+        $studentsCount = User::where('type', 'student')->get()->count();
+        $categoriesCount = CourseCategory::all()->count();
+        $coursesCount = Course::all()->count();
+        return view('courses', compact('courses', 'category','teachers','teachersCount','studentsCount','categoriesCount','coursesCount'));
     }
 
     public function allCourses()
