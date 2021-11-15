@@ -72,19 +72,7 @@ th {
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                    <label>@lang('trans.temporary_count') <span class="text-danger">*</span></label>
-                                    <input name="temporary_count" id="temporary_count" type="number"
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                    <label>@lang('trans.broken_count') <span class="text-danger">*</span></label>
-                                    <input name="broken_count" id="broken_count" type="number" class="form-control">
-                                </div>
-                            </div>
+                          
 
 
                         </div>
@@ -281,9 +269,7 @@ async function update(id) {
             $("#name_en").val(res.translations[1].name);
             $("#description_en").val(res.translations[1].description);
             $("#count").val(res.count);
-            $("#temporary_count").val(res.temporary_count);
-            $("#broken_count").val(res.broken_count);
-
+           
             document.getElementById('image').src = res.image_path;
 
         },

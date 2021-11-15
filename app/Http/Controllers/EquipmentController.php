@@ -65,8 +65,6 @@ class EquipmentController extends Controller
             'name_en' => 'required|string',
             'description_en' => 'required|string',
             'count' => 'required',
-            'temporary_count' => 'required',
-            'broken_count' => 'required',
 
         ]);
 

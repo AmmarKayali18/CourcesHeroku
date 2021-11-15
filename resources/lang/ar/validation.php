@@ -145,37 +145,36 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
+    
+
 
     'attributes' => [
         'name_ar' => 'الاسم بالعربي',
         'name_en' => 'الاسم بالإنجليزي',
-        'name_es' => 'الاسم بالروسي',
         'description_ar' => 'الوصف بالعربي',
         'description_en' => 'الوصف بالإنجليزي',
-        'description_es' => 'الوصف بالروسي',
         'email' => 'الإيميل',
+        'address' => 'العنوان',
         'emailUpdate' => 'الإيميل',
         'mobile' => 'رقم الموبايل',
         'password' => 'كلمة المرور',
         'type' => 'النوع',
-        'user_country_id' => 'المتجر',
-        'product_id' => 'المادة',
-        'category_product_id' => 'نوع المادة',
-        'visible' => 'حالة الظهور',
-        'discount' => 'الحسم',
-        'rating' => 'التقييم',
-        'state' => 'الحالة',
-        'aggregation' => 'حالة صاحب الطلب',
+        'file' => 'الصورة',
+        'class_id' => 'القاعة',
+        'teacher_id' => 'الاستاذ',
+        'course_id' => 'الكورس',
+        'count_chairs' => 'عدد المقاعد',
+        'start' => 'يبدأ من ',
+        'end' => 'ينتهي بـ',
+        'date' => 'التاريخ',
         'price' => 'السعر',
-        'value' => 'القيمة',
-        'user_id' => 'صاحب المتجر',
-        'category_id' => 'النوع',
-        'region_id' => 'المنطقة',
-        'order' => 'الترتيب',
-        'online' => 'يبدأ  من',
-        'offline' => 'ينتهي في',
-        'duration' => 'مدة التوصيل',
-        'free_delivery' => 'إمكانية التوصيل',
+        'count' => 'العدد',
+        'sessions_count' => 'عدد الجلسات',
+        'duration' => 'المدة',
+        'course_category_id' => 'نوع الكورس',
+        'equipment_id' => 'التجهيز',
+        'user_id' => 'المستخدم',
+     
     ],
 
 ];

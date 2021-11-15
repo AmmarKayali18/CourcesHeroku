@@ -146,6 +146,33 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name_ar' => 'Name (Arabic)',
+        'name_en' => 'Name (English)',
+        'description_ar' => 'Description (Arabic)',
+        'description_en' => 'Description (English)',
+        'email' => 'Email',
+        'address' => 'Address',
+        'emailUpdate' => 'Email',
+        'mobile' => 'Mobile',
+        'password' => 'Password',
+        'type' => 'Type',
+        'file' => 'Image',
+        'class_id' => 'Class',
+        'teacher_id' => 'Teacher',
+        'course_id' => 'Course',
+        'count_chairs' => 'Count of chairs',
+        'start' => 'Start At',
+        'end' => 'End At',
+        'date' => 'Date',
+        'price' => 'Price',
+        'count' => 'Count',
+        'sessions_count' => 'Sessions Count',
+        'duration' => 'Duration',
+        'course_category_id' => 'Category of course',
+        'equipment_id' => 'Equipment',
+        'user_id' => 'User',
+     
+    ],
 
 ];
