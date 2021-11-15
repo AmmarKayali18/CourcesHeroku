@@ -154,6 +154,7 @@ th {
                             <div class="form-group position-relative">
                                 <label>@lang('trans.select_course') <span class="text-danger">*</span></label>
                                 <select class="form-control" id="inputCourse" name="course_id">
+                                <option value="">Choose one</option>
                                     @foreach($coursesDone as $course)
                                     <option value="{{ $course->id }}">{{ $course->title }}</option>
                                     @endforeach
