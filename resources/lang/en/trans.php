@@ -84,6 +84,7 @@ return [
     'add_equipment' => 'Successfully added new equipment.',
     'add_class' => 'Successfully added new class.',
     'add_session' => 'Successfully added new session.',
+    'successfully_add_mark' => 'Successfully added mark.',
     'add_new_admin' => 'Add New Admin',
     'add_new_teacher' => 'Add New Teacher',
     'add_new_student' => 'Add New Student',
@@ -187,6 +188,10 @@ return [
     'save_session_count' => 'Session saved Number',
     'show_courses' => 'Show courses',
     'subscription' => 'Subscription',
+    'marker' => 'Marker',
+    'add_markers' => 'Add Marker',
+    'add_new_marker' => 'Add New Marker',
+    'student' => 'Student',
 
 
 

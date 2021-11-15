@@ -124,107 +124,56 @@ th {
         </div>
     </div>
 </div>
+<div class="col-lg-3 col-sm-12 ">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@lang('trans.add_markers')</h4>
+            <div class="general-button">
+                <button type="button" data-toggle="modal" data-target="#addMarker"
+                    class="btn mb-1 btn-flat btn-info">@lang('trans.add_new_marker')</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<div class="modal fade" id="addAdmin">
+<div class="modal fade" id="addMarker">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">@lang('trans.add_new_course')</h5>
+                <h5 class="modal-title">@lang('trans.add_new_marker')</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form enctype="multipart/form-data" method="POST" action="{{route('storeCourse')}}" id="addCourseForm">
+                <form enctype="multipart/form-data" method="POST" action="{{route('add-marker')}}" id="addCourseForm">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group position-relative">
-                                <label>@lang('trans.course_name_ar') <span class="text-danger">*</span></label>
-                                <input hidden id="UpdateId" name="Id">
-                                <input name="name_ar" style="direction:rtl" id="name_ar" type="text"
-                                    class="form-control">
+                                <label>@lang('trans.select_course') <span class="text-danger">*</span></label>
+                                <select class="form-control" id="inputCourse" name="course_id">
+                                    @foreach($coursesDone as $course)
+                                    <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <!--end col-->
                         <div class="col-md-6">
                             <div class="form-group position-relative">
-                                <label>@lang('trans.course_name_en') <span class="text-danger">*</span></label>
-
-                                <input name="name_en" id="name_en" style="direction:ltr;" type="text"
-                                    class="form-control">
+                                <label>@lang('trans.student') <span class="text-danger">*</span></label>
+                                <select class="form-control" id="inputStudent" name="student_id">
+                                </select>
                             </div>
                         </div>
-                        <!--end col-->
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group position-relative">
-                                <label>@lang('trans.description_ar')</label>
-                                <textarea class="form-control h-150px" rows="6" id="description_ar"
-                                    name="description_ar"
-                                    style="margin-top: 0px; margin-bottom: 0px; height: 157px; direction:rtl;"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group position-relative">
-                                <label>@lang('trans.description_en')</label>
-                                <textarea class="form-control h-150px" rows="6" id="description_en"
-                                    name="description_en"
-                                    style="margin-top: 0px; margin-bottom: 0px; height: 157px; direction:ltr;"></textarea>
+                                <label>@lang('trans.marker') <span class="text-danger">*</span></label>
+                                <input name="mark" id="mark" max="100" min="0" type="number" class="form-control">
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group position-relative">
-                                <label>@lang('trans.duration') <span class="text-danger">*</span></label>
-                                <input name="duration" id="duration" type="number" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group position-relative">
-                                <label>@lang('trans.sessions_count') <span class="text-danger">*</span></label>
-                                <input name="sessions_count" id="sessions_count" type="number" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group position-relative">
-                                <label>@lang('trans.start_at') <span class="text-danger">*</span></label>
-                                <input name="start" id="start" type="date" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group position-relative">
-                                <label>@lang('trans.end_at') <span class="text-danger">*</span></label>
-                                <input name="end" id="end" type="date" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group position-relative">
-                                <label>@lang('trans.price') <span class="text-danger">*</span></label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="input-group-text">$</span>
-                                    </div>
-                                    <input type="double" name="price" id="price" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-check mb-3">
-                                <label class="form-check-label"> <span class="text-danger">*</span>
-                                    <input type="checkbox" name="equipments" id="equipments" class="form-check-input"
-                                        value="0">@lang('trans.equipments_exist')</label>
-                            </div>
-
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group position-relative">
-                                <label>@lang('trans.image') <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control-file" name="file" id="fileupload">
-                            </div>
-                        </div>
-                        <!--end col-->
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
@@ -240,7 +189,28 @@ th {
 
 
 <script>
+$("#inputCourse").on('change', function() {
+    var e = document.getElementById("inputCourse");
+    var courseId = e.options[e.selectedIndex].value;
+    $.ajax({
+        url: "/student-course/" + courseId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(res) {
+            console.log(res);
+            $('#inputStudent')
+                .find('option')
+                .remove()
+                .end();
 
+            for (let i = 0; i < res.length; i++) {
+                $('#inputStudent').append(`<option value="${res[i].user.id}"> ${res[i].user.name}</option>`);
+            }
+        
+        }
+    });
+
+});
 
 async function update(id) {
     $.ajax({
@@ -271,8 +241,10 @@ async function update(id) {
                         " <div class='col-md-6'>  " +
                         "     <div class='form-check mb-3'>  " +
                         "         <label class='form-check-label'> <span class='text-danger'>*</span>  " +
-                        "            <input type='checkbox' name='present[]' id='present_" + res.course
-                        .user_course[index].user.id + "' class='form-check-input' value='" + res.course
+                        "            <input type='checkbox' name='present[]' id='present_" + res
+                        .course
+                        .user_course[index].user.id + "' class='form-check-input' value='" + res
+                        .course
                         .user_course[index].user.id + "' " +
                         "                >   @lang('trans.present')  </label>  " +
                         "      </div> " +
@@ -296,7 +268,7 @@ async function update(id) {
 }
 
 
-$("#UpdateForm").submit(function(event) {
+$("#addCourseForm").submit(function(event) {
     event.preventDefault();
     $.ajax({
         type: 'POST',

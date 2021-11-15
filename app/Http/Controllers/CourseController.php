@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -21,7 +22,8 @@ class CourseController extends Controller
             $query->where('continue', 1);
         }))->get();
         // return $courses;
-        return view('teacher.courses', compact('courses'));
+        $coursesDone =  Course::where([['teacher_id', $userId],['done',1]])->get();
+        return view('teacher.courses', compact('courses','coursesDone'));
     }
 
     public function detailsTeacherCourses($id)
@@ -167,5 +169,26 @@ class CourseController extends Controller
         Course::find($Id)->fill($request->all())->save();
 
         return ['message' =>  __('trans.update_course')];
+    }
+
+
+    public function studentsCourse($id)
+    {
+        $students = UserCourse::where('course_id',$id)->with('user')->get();
+        return $students;
+    }
+
+    public function addMarker(Request $request)
+    {
+        $studentId = $request->get('student_id');
+        $courseId = $request->get('course_id');
+        $mark = $request->get('mark');
+        DB::table('user_courses')
+        ->where('course_id', $courseId)
+        ->where('student_id', $studentId)
+        ->update([ 
+            'mark' => $mark
+        ]);
+        return ['message' =>  __('trans.successfully_add_mark')];
     }
 }

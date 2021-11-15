@@ -29,8 +29,10 @@
                     <h6>{{$userCourse->course->description}}</h6>
 
                     <h6>@lang('trans.start_at') : {{$userCourse->course->start}}</h6>
+                    <h6>@lang('trans.end_at') : {{$userCourse->course->end}}</h6>
+                    <h6>@lang('trans.marker') :  @if($userCourse->mark == 0 ) -- @else {{$userCourse->mark}} @endif</h6>
                     <h6> @lang('trans.sessions_count') : {{$userCourse->course->sessions_count}}</h6>
-                    <h6> @lang('trans.price') : {{$userCourse->course->price}}$</h6>
+                    
 
                 </div>
             </div>

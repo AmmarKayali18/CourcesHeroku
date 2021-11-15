@@ -28,6 +28,7 @@
                                                 <tr>
                                                     <th id="img">@lang('trans.image')</th>
                                                     <th>@lang('trans.course_title')</th>
+                                                    <th>@lang('trans.marker')</th>
                                                     <th>@lang('trans.done')</th>
                                                     <th>@lang('trans.paid')</th>
                                                 </tr>
@@ -38,6 +39,7 @@
                                                 <tr>
                                                     <th id="img">@lang('trans.image')</th>
                                                     <th>@lang('trans.course_title')</th>
+                                                    <th>@lang('trans.marker')</th>
                                                     <th>@lang('trans.done')</th>
                                                     <th>@lang('trans.paid')</th>
 
@@ -492,6 +494,7 @@ async function details(id) {
         type: 'GET',
         dataType: 'json',
         success: function(res) {
+            console.log(res);
             $('#details_course tbody').empty();
             for (let index = 0; index < res.length; index++) {
                 document.getElementById('details_course_tbody').insertAdjacentHTML("beforeend",
@@ -499,6 +502,7 @@ async function details(id) {
                     "  <td> <img src='" + res[index].course.image_path +
                     "'  style='height: 50px; width: 50px;'  class=' rounded-circle mr-3' alt=''> </td>" +
                     "    <td>" + res[index].course.title + "</td> " +
+                    "    <td>" + res[index].mark + "</td> " +
 
                     "   <td> " +
                     "@if( " + res[index].done + "== 0)" +

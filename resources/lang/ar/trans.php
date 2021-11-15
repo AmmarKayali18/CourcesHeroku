@@ -192,6 +192,12 @@ return [
     'save_session_count' => 'رقم الجلسة المحفوظة',
     'show_courses' => 'مشاهدة الكورسات',
     'subscription' => 'الاشتراك',
+    'marker' => 'العلامة',
+
+    'add_markers' => 'إضافة علامة',
+    'add_new_marker' => 'إضافة علامة جديدة',
+    'student' => 'الطالب',
+    'successfully_add_mark' => 'تم إضافة العلامة بنجاح',
 
 
 

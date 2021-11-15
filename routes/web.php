@@ -14,10 +14,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test', [App\Http\Controllers\UserController::class, 'payCourse'])->name('test');
 
-Route::get('/test', function () {
-    return view('test');
-})->name('HHH');
+
+// Route::get('/test', function () {
+//     return view('test');
+// })->name('HHH');
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localizationRedirect']], function () {
     // admin
@@ -88,6 +90,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     Route::group(['middleware' => ['auth', 'teacherRedirect']], function () {
         Route::get('/teacher-courses', [App\Http\Controllers\CourseController::class, 'teacherCourses'])->name('teacherCourses');
         Route::get('/details-course-teacher/{id}', [App\Http\Controllers\CourseController::class, 'detailsTeacherCourses'])->name('details-teacher-courses');
+        Route::get('/student-course/{id}', [App\Http\Controllers\CourseController::class, 'studentsCourse'])->name('student-course');
+        Route::post('/add-marker', [App\Http\Controllers\CourseController::class, 'addMarker'])->name('add-marker');
+    
     });
 
     // student
@@ -95,6 +100,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::get('/my-courses', [App\Http\Controllers\CourseController::class, 'myCourses'])->name('my-courses');
         // Route::get('/teachers', [App\Http\Controllers\UserController::class, 'allTeachers'])->name('all-teachers');
         Route::get('/subscription-course', [App\Http\Controllers\UserController::class, 'subscriptionCourse'])->name('subscription-course');
+        Route::post('/payCourse', [App\Http\Controllers\UserController::class, 'payCourse'])->name('pay-course');
     });
 
 

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client as GuzzleClient;
 
 class UserController extends Controller
 {
@@ -200,5 +201,58 @@ class UserController extends Controller
         $coursesCount = Course::all()->count();
         return view('subscription', compact('course','teachersCount','studentsCount','categoriesCount','coursesCount'));
 
+    }
+
+
+    public function payCourse(Request $request)
+    {
+        // https://api.tap.company/v2/charges/chg_TS040720211547Zu1n1311932
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'AccessToken' => 'key',
+            'Authorization' => 'Bearer sk_test_g2Sjiazxt37KOGDhknWCvcYd',
+        ];
+        
+        $client = new GuzzleClient([
+            'headers' => $headers
+        ]);
+        
+        $r = $client->request('GET', 'https://api.tap.company/v2/charges/chg_TS040720211547Zu1n1311932');
+        
+        // $r = $client->request('POST', 'https://api.tap.company/v2/charges', [
+        //     'form_params' => [
+        //         "amount"=> 1,
+        //         "currency"=> "KWD",
+        //         "customer"=> [ 
+        //             "first_name" => "test",
+        //             "middle_name"=> "test",
+        //             "last_name"=> "test",
+        //             "email"=> "AmmarKayali1@gmail.com",
+        //             "phone" => 
+        //              [ "country_code"=> "965",
+        //               "number"=> "50000000"
+        //         ]]
+        //           ,
+        //           "source"=> [
+        //             "id"=> "src_kw.knet"
+        //           ]
+        //           ,
+        //           "redirect"=> [
+        //             "url"=> "www.google.com"
+        //           ],
+        //     ]
+        // ]);
+        
+        $response = $r->getBody()->getContents();
+        return $response;
+        // $client = new \GuzzleHttp\Client();
+
+        // $response = $client->request('POST', $url, [
+        //     'json' => [
+        //         'receipt-data' => $base64Receipt,
+        //         'password' => $password
+        //     ]
+        // ]);
     }
 }
