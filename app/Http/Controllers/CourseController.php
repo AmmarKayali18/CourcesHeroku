@@ -22,8 +22,8 @@ class CourseController extends Controller
             $query->where('continue', 1);
         }))->get();
         // return $courses;
-        $coursesDone =  Course::where([['teacher_id', $userId],['done',1]])->get();
-        return view('teacher.courses', compact('courses','coursesDone'));
+        $coursesDone =  Course::where([['teacher_id', $userId], ['done', 1]])->get();
+        return view('teacher.courses', compact('courses', 'coursesDone'));
     }
 
     public function detailsTeacherCourses($id)
@@ -47,21 +47,34 @@ class CourseController extends Controller
         $studentsCount = User::where('type', 'student')->get()->count();
         $categoriesCount = CourseCategory::all()->count();
         $coursesCount = Course::all()->count();
-     
-        return view('my_courses', compact('courses','teachersCount','studentsCount','categoriesCount','coursesCount'));
+
+        return view('my_courses', compact('courses', 'teachersCount', 'studentsCount', 'categoriesCount', 'coursesCount'));
     }
 
     public function allCoursesStudent(Request $request)
     {
         $categoryId = $request->get('id');
-        $courses = Course::where('course_category_id',$categoryId)->with(['courseCategory', 'teacher', 'class'])->get();
-        $category = CourseCategory::where('id',$categoryId)->get()->first();
+        $coursesArr = Course::where('course_category_id', $categoryId)->with(['courseCategory', 'teacher', 'class'])->get();
+        $category = CourseCategory::where('id', $categoryId)->get()->first();
         $teachers = User::where('type', 'teacher')->get();
         $teachersCount = User::where('type', 'teacher')->get()->count();
         $studentsCount = User::where('type', 'student')->get()->count();
         $categoriesCount = CourseCategory::all()->count();
         $coursesCount = Course::all()->count();
-        return view('courses', compact('courses', 'category','teachers','teachersCount','studentsCount','categoriesCount','coursesCount'));
+        $courses =[];
+        foreach ($coursesArr as $key => $course) {
+
+            $findCourse = UserCourse::where([['course_id', $course->id], ['student_id', Auth::id()]])->get()->first();
+
+            if (isset($findCourse)) {
+                $course->sub = true;
+            } else {
+                $course->sub = false;
+            }
+            $courses[] = $course;
+        }
+        
+        return view('courses', compact('courses', 'category', 'teachers', 'teachersCount', 'studentsCount', 'categoriesCount', 'coursesCount'));
     }
 
     public function allCourses()
@@ -174,7 +187,7 @@ class CourseController extends Controller
 
     public function studentsCourse($id)
     {
-        $students = UserCourse::where('course_id',$id)->with('user')->get();
+        $students = UserCourse::where('course_id', $id)->with('user')->get();
         return $students;
     }
 
@@ -184,11 +197,11 @@ class CourseController extends Controller
         $courseId = $request->get('course_id');
         $mark = $request->get('mark');
         DB::table('user_courses')
-        ->where('course_id', $courseId)
-        ->where('student_id', $studentId)
-        ->update([ 
-            'mark' => $mark
-        ]);
+            ->where('course_id', $courseId)
+            ->where('student_id', $studentId)
+            ->update([
+                'mark' => $mark
+            ]);
         return ['message' =>  __('trans.successfully_add_mark')];
     }
 }

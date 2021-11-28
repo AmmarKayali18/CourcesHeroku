@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Client as GuzzleClient;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -194,65 +196,117 @@ class UserController extends Controller
     public function subscriptionCourse(Request $request)
     {
         $courseId = $request->get('id');
-        $course = Course::where('id',$courseId)->get()->first();
+
+        $findCourse = UserCourse::where([['course_id', $courseId], ['student_id', Auth::id()]])->get()->first();
+        
+        if (isset($findCourse)) {
+            return redirect('my-courses');
+        }
+
+        $course = Course::where('id', $courseId)->get()->first();
         $teachersCount = User::where('type', 'teacher')->get()->count();
         $studentsCount = User::where('type', 'student')->get()->count();
         $categoriesCount = CourseCategory::all()->count();
         $coursesCount = Course::all()->count();
-        return view('subscription', compact('course','teachersCount','studentsCount','categoriesCount','coursesCount'));
-
+        return view('subscription', compact('course', 'teachersCount', 'studentsCount', 'categoriesCount', 'coursesCount'));
     }
 
 
     public function payCourse(Request $request)
     {
-        // https://api.tap.company/v2/charges/chg_TS040720211547Zu1n1311932
-
+        $request->validate([
+            'course_id' => 'required',
+            'first_name' => 'required|string',
+            'email' => 'required|string|email',
+            'number' => 'required',
+            'country_code' => 'required',
+            'source_id' => 'required|string',
+        ]);
+        /// change this token (sk_test_8QOeqJlWVPrDjXS6mYKBInG3) to get records in you account 
         $headers = [
             'Content-Type' => 'application/json',
             'AccessToken' => 'key',
-            'Authorization' => 'Bearer sk_test_g2Sjiazxt37KOGDhknWCvcYd',
+            'Authorization' => 'Bearer sk_test_8QOeqJlWVPrDjXS6mYKBInG3',
         ];
-        
+
         $client = new GuzzleClient([
             'headers' => $headers
         ]);
+        $findCourse = UserCourse::where([['course_id', $request->get('course_id')], ['student_id', Auth::id()]])->get()->first();
         
-        $r = $client->request('GET', 'https://api.tap.company/v2/charges/chg_TS040720211547Zu1n1311932');
-        
+        if (isset($findCourse)) {
+            return redirect('categories');
+        }
+        $course = Course::where('id', $request->get('course_id'))->get()->first();
+        $date = Carbon::now();
+        $userCourse = new UserCourse();
+        $userCourse->course_id = $course->id;
+        $userCourse->student_id = Auth::id();
+        $userCourse->done = 0;
+        $userCourse->continue = 1;
+        $userCourse->mark = 0;
+        $userCourse->register_date = $date->format('Y-m-d');;
+        $userCourse->taken_equipment = 0;
+        $userCourse->is_paid = 1;
+        $userCourse->save();
+
         // $r = $client->request('POST', 'https://api.tap.company/v2/charges', [
         //     'form_params' => [
-        //         "amount"=> 1,
-        //         "currency"=> "KWD",
-        //         "customer"=> [ 
+        //         "amount" => 1,
+        //         "currency" => "KWD",
+        //         "threeDSecure" => true,
+        //         "save_card" => false,
+        //         "description" => "Test Description",
+        //         "statement_descriptor" => "Sample",
+        //         "customer" => [
         //             "first_name" => "test",
-        //             "middle_name"=> "test",
-        //             "last_name"=> "test",
-        //             "email"=> "AmmarKayali1@gmail.com",
-        //             "phone" => 
-        //              [ "country_code"=> "965",
-        //               "number"=> "50000000"
-        //         ]]
-        //           ,
-        //           "source"=> [
-        //             "id"=> "src_kw.knet"
-        //           ]
-        //           ,
-        //           "redirect"=> [
-        //             "url"=> "www.google.com"
-        //           ],
+        //             "middle_name" => "test",
+        //             "last_name" => "test",
+        //             "email" => "test@test.com",
+        //             "phone" =>
+        //             [
+        //                 "country_code" => "965",
+        //                 "number" => "50000000"
+        //             ]
+        //         ],
+        //         "source" => [
+        //             "id" => "src_kw.knet"
+        //         ],
+        //         "redirect" => [
+        //             "url" => "www.google.com"
+        //         ],
         //     ]
         // ]);
-        
-        $response = $r->getBody()->getContents();
-        return $response;
-        // $client = new \GuzzleHttp\Client();
-
-        // $response = $client->request('POST', $url, [
-        //     'json' => [
-        //         'receipt-data' => $base64Receipt,
-        //         'password' => $password
-        //     ]
-        // ]);
+        $r = $client->request('POST', 'https://api.tap.company/v2/charges', [
+            'form_params' => [
+                "amount" => 1,
+                "currency" => "KWD",
+                "threeDSecure" => true,
+                "save_card" => false,
+                "description" => "Test Description",
+                "statement_descriptor" => "Sample",
+                "customer" => [
+                    "first_name" => $request->get('first_name'),
+                    "middle_name" => "test",
+                    "last_name" => "test",
+                    "email" => $request->get('email'),
+                    "phone" =>
+                    [
+                        "country_code" => $request->get('country_code'),
+                        "number" => $request->get('number')
+                    ]
+                ],
+                "source" => [
+                    "id" => $request->get('source_id')
+                ],
+                "redirect" => [
+                    "url" => "www.google.com"
+                ],
+            ]
+        ]);
+        // Get data from result 
+        // $result = $r->getBody()->getContents();
+        // return $result;
+        return redirect('categories');
     }
 }

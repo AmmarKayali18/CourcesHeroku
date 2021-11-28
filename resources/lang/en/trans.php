@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-
+    'name' => 'Name',
     'login' => 'Sign in ',
     'logout' => 'Logout',
     'register' => 'Register ',
@@ -192,13 +192,9 @@ return [
     'add_markers' => 'Add Marker',
     'add_new_marker' => 'Add New Marker',
     'student' => 'Student',
-
-
-
-
-
-
-
+    'country_code' => 'Country Prefix',
+    'card' => 'Card',
+    'view_my_courses' => 'View My Courses',
 
 
 
